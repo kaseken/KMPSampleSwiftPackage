@@ -6,19 +6,27 @@ import PackageDescription
 let package = Package(
     name: "KMPSampleSwiftPackage",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "KMPSampleSwiftPackage",
-            targets: ["KMPSampleSwiftPackage"]),
+            targets: ["KMPSampleSwiftPackage"]
+        ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
+        .binaryTarget(
+            name: "KMPSampleLibrary",
+            path: "KMPSampleLibrary.xcframework"
+        ),
         .target(
-            name: "KMPSampleSwiftPackage"),
+            name: "KMPSampleSwiftPackage",
+            dependencies: [
+                "KMPSampleLibrary",
+            ]
+        ),
         .testTarget(
             name: "KMPSampleSwiftPackageTests",
-            dependencies: ["KMPSampleSwiftPackage"]
+            dependencies: [
+                "KMPSampleSwiftPackage",
+            ]
         ),
     ]
 )
